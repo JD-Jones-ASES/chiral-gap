@@ -22,7 +22,7 @@ E_q(x)=s^2x_1^2+\sum_{i=2}^n(x_{i-1}-q_i x_i)^2+x_n^2,
 ```
 
 Let $`Q(q)x=(s x_1,x_1-q_2x_2,\ldots,x_{n-1}-q_nx_n,x_n)`$,
-$`D=\operatorname{diag}(\beta_i)`$, and $`K(q)=D Q(q)^T Q(q)D`$. Thus $`K`$ has diagonal
+$`D=\mathrm{diag}(\beta_i)`$, and $`K(q)=D Q(q)^T Q(q)D`$. Thus $`K`$ has diagonal
 $`\beta_1^2(1+s^2)`$, $`\beta_i^2(1+q_i^2)`$, and adjacent off-diagonal
 $`-\beta_{i-1}\beta_i q_i`$. The last $`n`$ rows of $`Q(q)D`$ are invertible upper
 bidiagonal, so $`K(q)`$ is positive definite. Define the attained minimum
@@ -70,7 +70,7 @@ coordinates $`2,\ldots,n`$ of
 ```
 
 with mass $`\sum_{i=2}^n x_i^2/\beta_i^2`$; equivalently conjugate its Gram
-matrix by $`\operatorname{diag}(\beta_2,\ldots,\beta_n)`$. For $`n=2`$ this is $`[\beta_2^2]`$. Write
+matrix by $`\mathrm{diag}(\beta_2,\ldots,\beta_n)`$. For $`n=2`$ this is $`[\beta_2^2]`$. Write
 $`f=\lambda_{\min}(F)`$, $`\delta=\lambda_{\min}(S)`$.
 
 **Theorem 2 (two certificates).**
@@ -113,7 +113,7 @@ Apply this equivalence to $`E_q-\lambda M_\beta`$ at
 $`\lambda=\min(f,\delta)`$. Its interior diagonal terms are $`-\lambda/\beta_i^2`$.
 This proves $`K(q)\ge\lambda I`$. Saturation attains $`f`$ when $`f\le\delta`$.
 When $`\delta\le f`$, choose $`q_2=0`$ and all later ratios saturated. The resulting
-matrix is $`\operatorname{diag}(\beta_1^2(1+s^2),S)`$; its first entry is at least $`f\ge\delta`$ by the
+matrix is $`\mathrm{diag}(\beta_1^2(1+s^2),S)`$; its first entry is at least $`f\ge\delta`$ by the
 coordinate Rayleigh test on $`F`$. It attains $`\delta`$.
 
 ## Boundary threshold with positive envelopes
@@ -121,8 +121,8 @@ coordinate Rayleigh test on $`F`$. It attains $`\delta`$.
 Suppose all $`\rho_i>0`$. Then
 
 ```math
-\operatorname{sign}(f-\delta)=
-\operatorname{sign}(\beta_1^2s^2-\delta).
+\mathrm{sign}(f-\delta)=
+\mathrm{sign}(\beta_1^2s^2-\delta).
 ```
 
 Indeed the trailing block of $`F`$ is $`S+\beta_2^2\rho_2^2 e_1e_1^T`$.
