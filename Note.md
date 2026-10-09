@@ -1,27 +1,7 @@
 # Sources and scope of the chiral-gap result
 
-Date: **2026-10-08**. This is a bounded intake and literature assessment,
+Date: **2026-10-08**. This is a bounded literature comparison,
 not a priority determination or an external specialist review.
-
-## Supplied material and verification boundary
-
-JD supplied *Exact robust gaps in finite chiral chains: Two scalar
-certificates for arbitrary matrix disorder*, a thirteen-page research draft
-dated 8 October 2026, and attributed its ideas to GPT 6 Pro. Its SHA-256, checked on 8 October 2026, is
-
-```text
-47f18375cf797059b550ebb0ef3de0c56384b71396b88e5fd690893a0209b387
-```
-
-The supplied PDF is the source for the two-certificate reduction, boundary
-threshold, matrix-channel comparison and one-switch interval theorem.
-The written proof preserves that provenance and separates the original
-results from the positive-lower-bound extensions.
-
-No Lean source, exported proof object, compiler log or checker configuration
-was supplied with the PDF. Its reports of Lean, NanoDa and con-ron success
-have **not been independently verified**. They are source claims, not verification evidence for this repository.
-The machine-verification boundary for this development is stated in the README.
 
 ## The closest interval-matrix comparison
 
@@ -30,10 +10,10 @@ arXiv:1704.03670v2](https://arxiv.org/html/1704.03670v2) was checked in full
 text, particularly Sections 2–6. Proposition 5 reduces the outermost
 eigenvalue extrema to endpoint matrices. Intermediate eigenvalues require
 additional sign-pattern analysis; the paper treats sign invariancy, its
-failure and disjoint eigenvalue ranges. It does not state the draft's
-one-switch optimizer theorem.
+failure and disjoint eigenvalue ranges. It does not state the one-switch
+optimizer theorem presented here.
 
-The draft's distinction based only on correlated Gram entries is incomplete.
+Correlated Gram entries alone do not separate this problem from interval-matrix theory.
 The following direct comparison fixes the relevant eigenvalue index.
 Order scalar physical coordinates as
 

@@ -7,7 +7,7 @@ classifies every scalar minimizer when weak lower bounds are positive, and
 proves the sharp channel bound and its complete equality criterion.
 
 The full mathematical account is in [Proof.md](Proof.md).
-[Note.md](Note.md) records the source attribution, interval-matrix comparison
+[Note.md](Note.md) records the interval-matrix comparison
 and limits of the prior-art assessment.
 
 ## Scalar value and minimizers

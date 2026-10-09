@@ -6,10 +6,10 @@ matrix equality classification with strictly positive weak-bond lower bounds.
 It also proves ordered boundary transitions and quantitative stability.
 The claims concern finite open chains with deterministic bounds.
 
-The original two-certificate, one-switch and channel-transfer argument came
-from the GPT 6 Pro draft supplied by JD Jones. The positive-interval optimizer,
-stability and equality-channel extensions were developed with GPT-6 Astra.
-[Note.md](Note.md) records provenance and the prior-art comparison;
+The two-certificate, one-switch and channel-transfer arguments were developed
+with OpenAI GPT 6 Pro. The positive-interval optimizer, stability and
+equality-channel extensions were developed with GPT-6 Astra.
+[Note.md](Note.md) records the literature comparison;
 [README.md](README.md) records the scope of machine verification.
 
 ## Model and exact value
@@ -184,8 +184,7 @@ $`\|z_{i-1}+R_i z_i\|^2\ge(x_{i-1}-q_i x_i)^2`$. Thus
 \ge L\sum_i\|y_i\|^2.
 ```
 
-This form of the comparison retains the actual directional ratio. The
-draft instead minimizes over the interval, which gives the same bound.
+This comparison retains the actual directional ratio.
 Sharpness follows by $`B_i=\beta_i I`$, $`R_1=sI`$, $`R_i=-q_i I`$ at a scalar minimizer.
 The equality theorem below identifies all equality realizations when $`\ell_i>0`$.
 

@@ -17,24 +17,18 @@ classification:
   arxiv: [math.SP, math-ph]
   msc2020: [15A18, 15A42, 47A75, 81Q10]
 sources:
-  - title: Exact robust gaps in finite chiral chains
+  - title: Exact robust gaps for finite open chiral chains
     type: other
     authors: [JD Jones]
     relationship: formalizes
     notes: >-
-      Unpublished research argument supplied by JD Jones in an 8 October
-      2026 draft attributed to OpenAI GPT 6 Pro. The supplied draft is the
-      source of the one-switch, two-certificate and sharp channel results.
-      GPT-6 Astra independently reconstructed those proofs and developed
-      the positive-lower-bound optimizer, stability and equality extensions.
-      Proof.md gives the complete written account. Note.md records the draft
-      hash, prior-art comparison and limits of the literature assessment.
-      Reported Lean checks in the supplied draft were not furnished and are
-      not used as verification evidence for this development.
+      Proof.md in this repository gives the complete mathematical account
+      formalized here. Note.md records the literature comparison and its
+      scope. Disclosure.md records AI assistance and contributions.
 automation:
   methods:
     - method: agent
-      tool_setup: OpenAI Codex with GPT-6 Astra and collaborating agents; original GPT 6 Pro draft
+      tool_setup: OpenAI GPT 6 Pro; OpenAI Codex with GPT-6 Astra and collaborating agents
       notes: >-
         Agents reconstructed and extended the mathematical arguments and
         developed the Lean proof, documentation and verification workflow.
