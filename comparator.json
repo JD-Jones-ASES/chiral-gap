@@ -1,0 +1,25 @@
+{
+  "challenge_module": "ChiralGapChallenge",
+  "solution_module": "ChiralGapSolution",
+  "theorem_names": [
+    "ChiralGap.robustMinimum_spec",
+    "ChiralGap.one_switch_value",
+    "ChiralGap.two_certificate_value",
+    "ChiralGap.scalarGap_eigenvector",
+    "ChiralGap.scalarGap_le_eigenvalue",
+    "ChiralGap.scalar_optimizer_classification",
+    "ChiralGap.scalar_minimizers_vertex_or_edge",
+    "ChiralGap.robust_hopping_bound",
+    "ChiralGap.hopping_chiral_zero_multiplicity",
+    "ChiralGap.robust_chiral_sharpness_constrained",
+    "ChiralGap.hopping_nonzero_spectrum",
+    "ChiralGap.robust_chiral_complex_gap",
+    "ChiralGap.matrix_equality_criterion",
+    "ChiralGap.chiral_eigenbasis"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

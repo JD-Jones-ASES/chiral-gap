@@ -1,0 +1,133 @@
+name: Verify
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: ${{ matrix.check }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      matrix:
+        check: [kernel-replay, fresh-build]
+    env:
+      LEAN_NUM_THREADS: 2
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Record exact source and check statement surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p verification
+          git rev-parse HEAD | tee verification/commit.txt
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          python3 - <<'PY'
+          import json, pathlib, re
+          root = pathlib.Path('.')
+          files = list(root.glob('*.lean')) + list(root.glob('ChiralGap/*.lean'))
+          for file in files:
+              text = file.read_text()
+              assert not file.is_symlink(), file
+              assert text.startswith('module\n'), file
+              assert len(text.splitlines()) <= 10000, file
+              if file.name != 'ChiralGapChallenge.lean':
+                  assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b', text), file
+          challenge = root / 'ChiralGapChallenge.lean'
+          assert challenge.stat().st_size <= 100 * 1024
+          assert len(challenge.read_text().splitlines()) <= 1000
+          imports = re.findall(r'^public import (\S+)', challenge.read_text(), re.M)
+          assert imports and all(x == 'Mathlib' or x.startswith('Mathlib.') for x in imports)
+          for pkg in json.loads((root / 'lake-manifest.json').read_text())['packages']:
+              assert re.fullmatch(r'[0-9a-f]{40}', pkg['rev']), pkg['name']
+              assert re.fullmatch(r'https://github.com/[\w.-]+/[\w.-]+', pkg['url']), pkg['name']
+          print(f'Source checks passed: {len(files)} Lean modules.')
+          PY
+      - name: Install pinned Elan
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --proto '=https' --tlsv1.2 \
+            https://github.com/leanprover/elan/releases/download/v4.2.3/elan-x86_64-unknown-linux-gnu.tar.gz \
+            -o "$RUNNER_TEMP/elan.tar.gz"
+          echo "df0b2b3a439961ffcbb3985214365ffe40f49bc871df04dff268c7d8e21ca8b2  $RUNNER_TEMP/elan.tar.gz" | sha256sum -c -
+          tar xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Fetch pinned public dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          elan toolchain install "$(cat lean-toolchain)"
+          lake exe cache get
+          cmp lean-toolchain .lake/packages/mathlib/lean-toolchain
+          git diff --exit-code -- lake-manifest.json
+      - name: Build all proof and statement modules from source
+        shell: bash
+        run: |
+          set -euo pipefail
+          /usr/bin/time -v lake build 2>&1 | tee verification/build.log
+      - name: Audit transitive axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os, pathlib
+          names = json.loads(pathlib.Path('comparator.json').read_text())['theorem_names']
+          pathlib.Path(os.environ['RUNNER_TEMP'], 'AxiomAudit.lean').write_text(
+              'import ChiralGap\n' + ''.join('#print axioms ' + n + '\n' for n in names))
+          PY
+          lake env lean "$RUNNER_TEMP/AxiomAudit.lean" | tee verification/axioms.log
+          python3 - <<'PY'
+          import pathlib, re
+          text = pathlib.Path('verification/axioms.log').read_text()
+          axioms = re.findall(r'depends on axioms:\s*\[([^]]*)\]', text)
+          import json
+          assert len(axioms) == len(json.loads(pathlib.Path('comparator.json').read_text())['theorem_names']), text
+          permitted = {'propext', 'Quot.sound', 'Classical.choice'}
+          for entry in axioms:
+              assert {x.strip() for x in entry.split(',')} <= permitted, entry
+          PY
+      - name: Install pinned sandbox
+        if: matrix.check == 'kernel-replay'
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y meson ninja-build libcap-dev pkg-config
+          git clone --filter=blob:none https://github.com/PalomarRegistry/PalomarSubmission.git "$RUNNER_TEMP/verifier"
+          git -C "$RUNNER_TEMP/verifier" checkout --detach d4e41c1d5b0d114c4859e6e5831dc6d3ad1d0d44
+          bwrap_path=$(bash "$RUNNER_TEMP/verifier/scripts/install_bwrap.sh" "$RUNNER_TEMP/bubblewrap")
+          echo "COMPARATOR_BWRAP=$bwrap_path" >> "$GITHUB_ENV"
+      - name: Compare statements and replay Lean, NanoDa and con-ron kernels
+        if: matrix.check == 'kernel-replay'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os, pathlib, subprocess
+          config = json.loads(pathlib.Path('comparator.json').read_text())
+          prefix = pathlib.Path(subprocess.check_output(['lean', '--print-prefix'], text=True).strip())
+          config['external_kernels'] = {
+              'nanoda': [str(prefix / 'bin/nanoda_bin')],
+              'con-ron': [str(prefix / 'bin/con-ron')],
+          }
+          pathlib.Path(os.environ['RUNNER_TEMP'], 'comparator-kernels.json').write_text(json.dumps(config))
+          PY
+          /usr/bin/time -v lake comparator --config "$RUNNER_TEMP/comparator-kernels.json" 2>&1 | tee verification/comparator.log
+      - name: Verify tracked source remains exact
+        shell: bash
+        run: git diff --exit-code HEAD
+      - name: Preserve private verification evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: verification-${{ matrix.check }}-${{ github.sha }}
+          path: verification/
+          retention-days: 90

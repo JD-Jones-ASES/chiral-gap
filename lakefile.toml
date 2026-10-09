@@ -1,0 +1,17 @@
+name = "chiralGap"
+version = "0.1.0"
+defaultTargets = ["ChiralGap", "ChiralGapChallenge", "ChiralGapSolution"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "a98628e16c11f5167f16124105ddce53efa9bfe5"
+
+[[lean_lib]]
+name = "ChiralGap"
+
+[[lean_lib]]
+name = "ChiralGapChallenge"
+
+[[lean_lib]]
+name = "ChiralGapSolution"
