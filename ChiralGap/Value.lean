@@ -8,7 +8,7 @@ public section
 namespace ChiralGap
 
 /-- The lowest squared singular value for one fixed scalar chain. -/
-noncomputable def scalarGap {n : ℕ} (s : ℝ) (β : Fin (n + 1) → ℝ) (q : Fin n → ℝ) : ℝ :=
+@[expose] noncomputable def scalarGap {n : ℕ} (s : ℝ) (β : Fin (n + 1) → ℝ) (q : Fin n → ℝ) : ℝ :=
   robustMinimum s β q q
 
 lemma scalarGap_spec {n : ℕ} (s : ℝ) (β : Fin (n + 1) → ℝ) (q : Fin n → ℝ)

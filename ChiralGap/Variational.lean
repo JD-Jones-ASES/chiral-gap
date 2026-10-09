@@ -139,7 +139,7 @@ theorem exists_scalar_optimum {n : ℕ} (s : ℝ) (β : Fin (n + 1) → ℝ)
 
 /-- Worst squared scalar gap, defined by the literal residual energy on the
 weighted unit sphere. Theorems below establish attainment and positivity. -/
-noncomputable def robustMinimum {n : ℕ} (s : ℝ) (β : Fin (n + 1) → ℝ)
+@[expose] noncomputable def robustMinimum {n : ℕ} (s : ℝ) (β : Fin (n + 1) → ℝ)
     (ell rho : Fin n → ℝ) : ℝ :=
   sInf {t | ∃ q x, Admissible ell rho q ∧ mass β x = 1 ∧ energy s q x = t}
 

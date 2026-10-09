@@ -56,7 +56,7 @@ intervals. Its gap is its **nth largest** eigenvalue, equivalently its
 Hamiltonian has exactly n positive eigenvalues, one zero and n negative
 eigenvalues. Hladík's outermost-eigenvalue formula therefore does not directly
 give this gap, but his broader interval-matrix framework does contain the
-scalar problem. With s>0 and every lower weak-bond bound positive, all
+scalar problem. With $`s>0`$ and every lower weak-bond bound positive, all
 off-diagonals are positive and the Jacobi eigenvalues are simple; allowed
 zero bonds require the corresponding reducible/limit cases.
 

@@ -14,64 +14,64 @@ stability and equality-channel extensions were developed with GPT-6 Astra.
 
 ## Model and exact value
 
-Fix n>=2, beta_i>0, s>=0 and 0<=ell_i<=rho_i for 2<=i<=n. For real x set
+Fix $`n\ge2`$, $`\beta_i>0`$, $`s\ge0`$ and $`0\le\ell_i\le\rho_i`$ for $`2\le i\le n`$. For real $`x`$ set
 
 ```math
 E_q(x)=s^2x_1^2+\sum_{i=2}^n(x_{i-1}-q_i x_i)^2+x_n^2,
 \qquad M_\beta(x)=\sum_{i=1}^n x_i^2/\beta_i^2.
 ```
 
-Let Q(q)x=(s x_1,x_1-q_2x_2,...,x_{n-1}-q_nx_n,x_n),
-D=diag(beta_i), and K(q)=D Q(q)^T Q(q)D. Thus K has diagonal
-beta_1^2(1+s^2), beta_i^2(1+q_i^2), and adjacent off-diagonal
--beta_{i-1} beta_i q_i. The last n rows of Q(q)D are invertible upper
-bidiagonal, so K(q) is positive definite. Define the attained minimum
+Let $`Q(q)x=(s x_1,x_1-q_2x_2,\ldots,x_{n-1}-q_nx_n,x_n)`$,
+$`D=\operatorname{diag}(\beta_i)`$, and $`K(q)=D Q(q)^T Q(q)D`$. Thus $`K`$ has diagonal
+$`\beta_1^2(1+s^2)`$, $`\beta_i^2(1+q_i^2)`$, and adjacent off-diagonal
+$`-\beta_{i-1}\beta_i q_i`$. The last $`n`$ rows of $`Q(q)D`$ are invertible upper
+bidiagonal, so $`K(q)`$ is positive definite. Define the attained minimum
 
 ```math
 L=\min_{q_i\in[\ell_i,\rho_i]}\lambda_{\min}K(q)>0.
 ```
 
-**Theorem 1 (one-switch value).** Define q^(k)
-by q_i=ell_i for i<=k and q_i=rho_i for i>k, for k=1,...,n. Then
+**Theorem 1 (one-switch value).** Define $`q^{(k)}`$
+by $`q_i=\ell_i`$ for $`i\le k`$ and $`q_i=\rho_i`$ for $`i>k`$, for $`k=1,\ldots,n`$. Then
 
 ```math
 L=\min_{1\le k\le n}\lambda_{\min}K(q^{(k)}).
 ```
 
-This includes zero and fixed intervals. Here and below L is a **squared**
-singular-value gap. The physical excitation gap is sqrt(L).
+This includes zero and fixed intervals. Here and below $`L`$ is a **squared**
+singular-value gap. The physical excitation gap is $`\sqrt L`$.
 
-**Proof.** Let L0 be the right-hand minimum and fix 0<lambda<L0. After
-congruence by D^-1, the Schur pivots of K(q)-lambda I satisfy
+**Proof.** Let $`L_0`$ be the right-hand minimum and fix $`0<\lambda<L_0`$. After
+congruence by $`D^{-1}`$, the Schur pivots of $`K(q)-\lambda I`$ satisfy
 
 ```math
 a_1=1+s^2-\lambda/\beta_1^2,\qquad
 a_j=1-\lambda/\beta_j^2+q_j^2(1-1/a_{j-1}).
 ```
 
-While a>0, the update is nondecreasing in a. At a given preceding pivot
-its least value uses ell_j if a>=1 and rho_j if a<1. Construct this greedy
+While $`a>0`$, the update is nondecreasing in $`a`$. At a given preceding pivot
+its least value uses $`\ell_j`$ if $`a\ge1`$ and $`\rho_j`$ if $`a<1`$. Construct this greedy
 sequence. Each chosen prefix extends to a one-switch candidate, whose
 positive definiteness proves positivity of the next pivot. Once a pivot
-is <=1, the next is strictly below 1 because lambda>0. Thus the greedy
+is at most $`1`$, the next is strictly below $`1`$ because $`\lambda>0`$. Thus the greedy
 choices never return from upper to lower endpoints. Induction compares
 every other admissible pivot sequence to the positive greedy sequence,
-using first monotonicity in a and then minimization in q_j. Sylvester's
-criterion gives K(q)>lambda I for every q. Let lambda increase to L0.
+using first monotonicity in $`a`$ and then minimization in $`q_j`$. Sylvester's
+criterion gives $`K(q)>\lambda I`$ for every $`q`$. Let $`\lambda`$ increase to $`L_0`$.
 The reverse inequality follows from the admissibility of the candidates.
 
 ## Two certificates when cuts are allowed
 
-Suppose ell_i=0. Let F=K(rho_2,...,rho_n). Let S be the matrix on
-coordinates 2,...,n of
+Suppose $`\ell_i=0`$. Let $`F=K(\rho_2,\ldots,\rho_n)`$. Let $`S`$ be the matrix on
+coordinates $`2,\ldots,n`$ of
 
 ```math
 \sum_{i=3}^n(x_{i-1}-\rho_i x_i)^2+x_n^2
 ```
 
-with mass sum_{i=2}^n x_i^2/beta_i^2; equivalently conjugate its Gram
-matrix by diag(beta_2,...,beta_n). For n=2 this is [beta_2^2]. Write
-f=lambda_min(F), delta=lambda_min(S).
+with mass $`\sum_{i=2}^n x_i^2/\beta_i^2`$; equivalently conjugate its Gram
+matrix by $`\operatorname{diag}(\beta_2,\ldots,\beta_n)`$. For $`n=2`$ this is $`[\beta_2^2]`$. Write
+$`f=\lambda_{\min}(F)`$, $`\delta=\lambda_{\min}(S)`$.
 
 **Theorem 2 (two certificates).**
 
@@ -80,7 +80,7 @@ L=\min\{f,\delta\}.
 ```
 
 Here is a direct proof which includes zero envelopes and semidefinite
-endpoints. For N>=1 and envelopes rho_i>=0, on coordinates 0,...,N define
+endpoints. For $`N\ge1`$ and envelopes $`\rho_i\ge0`$, on coordinates $`0,\ldots,N`$ define
 
 ```math
 \mathcal Q_{d,q}(x)=\sum_{i=0}^N d_ix_i^2+
@@ -88,11 +88,11 @@ endpoints. For N>=1 and envelopes rho_i>=0, on coordinates 0,...,N define
 \qquad d_i\le0\ (0<i<N).
 ```
 
-This form is nonnegative for every 0<=q_i<=rho_i iff the saturated form
-and the saturated suffix on x_0=0 with q_0=0 are nonnegative.
+This form is nonnegative for every $`0\le q_i\le\rho_i`$ iff the saturated form
+and the saturated suffix on $`x_0=0`$ with $`q_0=0`$ are nonnegative.
 
-For a chosen edge k, scale its strict suffix by t (operator L_t) and
-project onto that suffix (operator P). A termwise identity is
+For a chosen edge $`k`$, scale its strict suffix by $`t`$ (operator $`L_t`$) and
+project onto that suffix (operator $`P`$). A termwise identity is
 
 ```math
 \mathcal Q_{q_k=rt}(x)=\mathcal Q_{q_k=r}(L_tx)
@@ -102,82 +102,82 @@ project onto that suffix (operator P). A termwise identity is
 It proves positivity throughout the box from positivity at its vertices.
 At a vertex the cut edges split the form into blocks. The first block is
 a restriction of the fully saturated form. To control a later block,
-first consider its saturated suffix starting at j>1. Extend a test vector
-backwards by x_i=rho_i x_{i+1}, down to i=1, and set x_0=0 with the first
+first consider its saturated suffix starting at $`j>1`$. Extend a test vector
+backwards by $`x_i=\rho_i x_{i+1}`$, down to $`i=1`$, and set $`x_0=0`$ with the first
 edge cut. Added residuals vanish and added diagonal terms are nonpositive.
 Thus positivity of the longest suffix forces positivity of this shorter
 suffix. Restriction on the right then controls the original block. Sum
 over blocks and use the identity. Necessity follows by specialization.
 
-Apply this equivalence to E_q-lambda M_beta at
-lambda=min(f,delta). Its interior diagonal terms are -lambda/beta_i^2.
-This proves K(q)>=lambda I. Saturation attains f when f<=delta.
-When delta<=f, choose q_2=0 and all later ratios saturated. The resulting
-matrix is diag(beta_1^2(1+s^2),S); its first entry is >=f>=delta by the
-coordinate Rayleigh test on F. It attains delta.
+Apply this equivalence to $`E_q-\lambda M_\beta`$ at
+$`\lambda=\min(f,\delta)`$. Its interior diagonal terms are $`-\lambda/\beta_i^2`$.
+This proves $`K(q)\ge\lambda I`$. Saturation attains $`f`$ when $`f\le\delta`$.
+When $`\delta\le f`$, choose $`q_2=0`$ and all later ratios saturated. The resulting
+matrix is $`\operatorname{diag}(\beta_1^2(1+s^2),S)`$; its first entry is at least $`f\ge\delta`$ by the
+coordinate Rayleigh test on $`F`$. It attains $`\delta`$.
 
 ## Boundary threshold with positive envelopes
 
-Suppose all rho_i>0. Then
+Suppose all $`\rho_i>0`$. Then
 
 ```math
 \operatorname{sign}(f-\delta)=
 \operatorname{sign}(\beta_1^2s^2-\delta).
 ```
 
-Indeed the trailing block of F is S+beta_2^2 rho_2^2 e_1e_1^T.
-Its smallest eigenvalue is >delta: a minimizing eigenvector of the
-irreducible Jacobi matrix S is nonzero in its first coordinate. Interlacing
-then leaves at most one eigenvalue of F at or below delta. Expansion gives
+Indeed the trailing block of $`F`$ is $`S+\beta_2^2\rho_2^2 e_1e_1^T`$.
+Its smallest eigenvalue is greater than $`\delta`$: a minimizing eigenvector of the
+irreducible Jacobi matrix $`S`$ is nonzero in its first coordinate. Interlacing
+then leaves at most one eigenvalue of $`F`$ at or below $`\delta`$. Expansion gives
 
 ```math
 \det(F-\delta I)=\beta_2^2\rho_2^2
  (\beta_1^2s^2-\delta)C,
 ```
 
-where C is the determinant of the strict trailing principal block of
-S-delta I, positive by strict interlacing (C=1 for n=2).
+where $`C`$ is the determinant of the strict trailing principal block of
+$`S-\delta I`$, positive by strict interlacing ($`C=1`$ for $`n=2`$).
 
 The minimizing scalar magnitudes are uniquely all saturated below the
-threshold, uniquely q_2=0 with later ratios saturated above it, and exactly
-that full q_2 interval with later ratios saturated at the threshold.
+threshold, uniquely $`q_2=0`$ with later ratios saturated above it, and exactly
+that full $`q_2`$ interval with later ratios saturated at the threshold.
 For completeness, the vertex argument is strict: proper saturated prefixes
-have lowest eigenvalue >f by interlacing; shorter zero-boundary suffixes
-have lowest eigenvalue >delta. For the latter, the inverse of the upper
-bidiagonal suffix has entries beta_i^-1 product_{r=i+1}^j rho_r (i<=j).
+have lowest eigenvalue greater than $`f`$ by interlacing; shorter zero-boundary suffixes
+have lowest eigenvalue greater than $`\delta`$. For the latter, the inverse of the upper
+bidiagonal suffix has entries $`\beta_i^{-1}\prod_{r=i+1}^j\rho_r`$ ($`i\le j`$).
 Removing its first rows/columns strictly decreases its norm, by testing
 the positive top singular vector of the shorter inverse in the longer one.
 Right truncation is again strict interlacing. Hence the only minimizing
 vertices are the stated one or two vertices. The full determinant of
-K(q)-L I is multiaffine in q_i^2 by its continuant recurrence; it is a
+$`K(q)-LI`$ is multiaffine in $`q_i^2`$ by its continuant recurrence; it is a
 convex combination of nonnegative vertex determinants. Its zero set is
 therefore exactly the stated vertex or edge. Positivity already proved
 turns determinant zeros into lowest-eigenvalue equality.
 
 ## Sharp arbitrary-channel transfer
 
-Let B_i and A_i be complex d by d matrices, with B_i invertible, and set
-R_i=A_i B_i^-1 in that order. Define the tall hopping operator
+Let $`B_i`$ and $`A_i`$ be complex $`d\times d`$ matrices, with $`B_i`$ invertible, and set
+$`R_i=A_i B_i^{-1}`$ in that order. Define the tall hopping operator
 
 ```math
 \mathcal A y=(A_1y_1,B_1y_1+A_2y_2,...,
 B_{n-1}y_{n-1}+A_ny_n,B_ny_n).
 ```
 
-Assume sigma_min(B_i)>=beta_i, sigma_min(R_1)>=s, and
-ell_i<=sigma_min(R_i)<=||R_i||<=rho_i for i>=2. Then
+Assume $`\sigma_{\min}(B_i)\ge\beta_i`$, $`\sigma_{\min}(R_1)\ge s`$, and
+$`\ell_i\le\sigma_{\min}(R_i)\le\|R_i\|\le\rho_i`$ for $`i\ge2`$. Then
 
 ```math
 \sigma_{\min}(\mathcal A)^2\ge L,
 ```
 
-and this is sharp for every channel dimension d. No simultaneous
-diagonalization, commutation, probability law, or condition rho_i<1 is used.
+and this is sharp for every channel dimension $`d`$. No simultaneous
+diagonalization, commutation, probability law, or condition $`\rho_i<1`$ is used.
 
-Put z_i=B_i y_i, x_i=||z_i||. If x_i>0 choose the actual ratio
-q_i=||R_i z_i||/x_i in [ell_i,rho_i]; if x_i=0 choose any admissible ratio.
+Put $`z_i=B_i y_i`$, $`x_i=\|z_i\|`$. If $`x_i>0`$ choose the actual ratio
+$`q_i=\|R_i z_i\|/x_i`$ in $`[\ell_i,\rho_i]`$; if $`x_i=0`$ choose any admissible ratio.
 The reverse triangle inequality gives
-||z_{i-1}+R_i z_i||^2 >= (x_{i-1}-q_i x_i)^2. Thus
+$`\|z_{i-1}+R_i z_i\|^2\ge(x_{i-1}-q_i x_i)^2`$. Thus
 
 ```math
 \|\mathcal Ay\|^2\ge E_q(x)\ge L M_\beta(x)
@@ -186,20 +186,20 @@ The reverse triangle inequality gives
 
 This form of the comparison retains the actual directional ratio. The
 draft instead minimizes over the interval, which gives the same bound.
-Sharpness follows by B_i=beta_i I, R_1=s I, R_i=-q_i I at a scalar minimizer.
-The equality theorem below identifies all equality realizations when ell_i>0.
+Sharpness follows by $`B_i=\beta_i I`$, $`R_1=sI`$, $`R_i=-q_i I`$ at a scalar minimizer.
+The equality theorem below identifies all equality realizations when $`\ell_i>0`$.
 
-The chiral Hamiltonian H=[[0,A],[A*,0]] has exactly d zero eigenvalues and
-nonzero eigenvalues plus/minus the nd singular values of A: delete the
+The chiral Hamiltonian $`H=\begin{pmatrix}0&\mathcal A\\\mathcal A^*&0\end{pmatrix}`$ has exactly $`d`$ zero eigenvalues and
+nonzero eigenvalues plus/minus the $`nd`$ singular values of $`\mathcal A`$: delete the
 first block row to obtain an invertible upper block-bidiagonal operator.
-Therefore the minimum nonzero |energy| is >=sqrt(L), with sharpness.
+Therefore the minimum nonzero energy magnitude is at least $`\sqrt L`$, with sharpness.
 This is a finite single-particle gap theorem. It is not a many-body,
 bulk-edge, mobility-gap, or topological-phase theorem.
 
 
 ## Positive weak-bond lower bounds
 
-For the following four results assume additionally that every ell_i>0.
+For the following four results assume additionally that every $`\ell_i>0`$.
 
 ## Theorem 3: the complete scalar minimizer set is one face
 

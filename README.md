@@ -12,17 +12,17 @@ and limits of the prior-art assessment.
 
 ## Scalar value and minimizers
 
-For $N\ge2$ sites, positive strong bounds $\beta_i$, boundary parameter
-$s\ge0$, and ratios $q_i\in[\ell_i,\rho_i]$ with $0\le\ell_i\le\rho_i$, set
+For $`N\ge2`$ sites, positive strong bounds $`\beta_i`$, boundary parameter
+$`s\ge0`$, and ratios $`q_i\in[\ell_i,\rho_i]`$ with $`0\le\ell_i\le\rho_i`$, set
 
 ```math
 E_q(x)=s^2x_1^2+\sum_{i=2}^{N}(x_{i-1}-q_i x_i)^2+x_N^2,
 \qquad M_\beta(x)=\sum_{i=1}^{N}\frac{x_i^2}{\beta_i^2}.
 ```
 
-The literal rectangular residual matrix $Q(q)D_\beta$ has Gram matrix
-$K(q)=D_\beta Q(q)^TQ(q)D_\beta$. Its least eigenvalue is the minimum of
-$E_q/M_\beta$. The squared robust gap is
+The literal rectangular residual matrix $`Q(q)D_\beta`$ has Gram matrix
+$`K(q)=D_\beta Q(q)^TQ(q)D_\beta`$. Its least eigenvalue is the minimum of
+$`E_q/M_\beta`$. The squared robust gap is
 
 ```math
 L=\min_{\ell\le q\le\rho}\lambda_{\min}K(q)
@@ -32,22 +32,22 @@ q_i^{(k)}=\begin{cases}\ell_i&i\le k,\\\rho_i&i>k.\end{cases}
 ```
 
 The proof establishes attainment and positivity from these actual matrices.
-Zero bounds and fixed intervals are included. If every $\ell_i=0$, only
+Zero bounds and fixed intervals are included. If every $`\ell_i=0`$, only
 two scalar certificates are needed: the fully saturated chain and its
-saturated zero-left-boundary suffix on sites $2,\ldots,N$.
+saturated zero-left-boundary suffix on sites $`2,\ldots,N`$.
 
-When every $\ell_i>0$, all minimizing configurations form either one
+When every $`\ell_i>0`$, all minimizing configurations form either one
 one-switch vertex or one full transition interval: lower endpoints before
 one free coordinate, upper endpoints after it. Fixed intervals may collapse
 that interval to a point. An exact greedy Schur-pivot rule identifies the
-entire set. A tie can occur at most once. The formal indexing uses $n$ edges
-and $n+1$ sites, and also includes the one-site case.
+entire set. A tie can occur at most once. The formal indexing uses $`n`$ edges
+and $`n+1`$ sites, and also includes the one-site case.
 
 ## Matrix channels and the physical gap
 
-Let the channel space have any positive finite complex dimension $d$.
-For invertible strong bonds $B_i$ and weak bonds $A_i$, put
-$R_i=A_iB_i^{-1}$, in that order. Assume
+Let the channel space have any positive finite complex dimension $`d`$.
+For invertible strong bonds $`B_i`$ and weak bonds $`A_i`$, put
+$`R_i=A_iB_i^{-1}`$, in that order. Assume
 
 ```math
 \sigma_{\min}(B_i)\ge\beta_i,\qquad
@@ -62,7 +62,7 @@ The actual tall hopping operator is
  B_{N-1}y_{N-1}+A_Ny_N,\ B_Ny_N).
 ```
 
-Then $\|\mathcal A y\|^2\ge L\|y\|^2$. The formal hypotheses use the
+Then $`\|\mathcal A y\|^2\ge L\|y\|^2`$. The formal hypotheses use the
 equivalent directional norm inequalities, avoiding conventions about the
 ordering of singular values. No commutation or common eigenbasis is assumed.
 Scalar identity bonds attain the bound in every positive channel dimension
@@ -74,15 +74,15 @@ The chiral block operator
 H=\begin{pmatrix}0&\mathcal A\\\mathcal A^*&0\end{pmatrix}
 ```
 
-has a kernel of dimension exactly $d$. Its nonzero spectrum is precisely
-the two signs of the $Nd$ singular values of $\mathcal A$, with an explicit
+has a kernel of dimension exactly $`d`$. Its nonzero spectrum is precisely
+the two signs of the $`Nd`$ singular values of $`\mathcal A`$, with an explicit
 isomorphism between the corresponding eigenspaces. Every nonzero energy
-has magnitude at least $\sqrt L$. The attaining construction has both
-$+\sqrt L$ and $-\sqrt L$ as actual eigenvalues.
+has magnitude at least $`\sqrt L`$. The attaining construction has both
+$`+\sqrt L`$ and $`-\sqrt L`$ as actual eigenvalues.
 
 With strictly positive weak lower bounds, equality holds exactly when a
 scalar minimizing configuration supports aligned unit channel vectors
-$u_i$ satisfying
+$`u_i`$ satisfying
 
 ```math
 u_i\in\ker(B_iB_i^*-\beta_i^2I),\qquad
