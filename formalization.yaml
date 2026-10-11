@@ -18,13 +18,17 @@ classification:
   msc2020: [15A18, 15A42, 47A75, 81Q10]
 sources:
   - title: Exact robust gaps for finite open chiral chains
-    type: other
+    type: original-proof
     authors: [JD Jones]
-    relationship: formalizes
-    notes: >-
-      Proof.md in this repository gives the complete mathematical account
-      formalized here. Note.md records the literature comparison and its
-      scope. Disclosure.md records AI assistance and contributions.
+    relationship: other
+    note: >-
+      This formalization first presents the result as original work of this
+      project. Proof.md is the accompanying mathematical account of the same
+      development, not a distinct prior source work being formalized.
+      The arguments were developed with OpenAI GPT 6 Pro and GPT-6 Astra,
+      with their respective contributions recorded in Disclosure.md.
+      Note.md compares background literature; no worldwide priority claim
+      or independent human specialist review is implied.
 automation:
   methods:
     - method: agent

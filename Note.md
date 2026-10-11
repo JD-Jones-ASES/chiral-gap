@@ -3,6 +3,17 @@
 Date: **2026-10-08**. This is a bounded literature comparison,
 not a priority determination or an external specialist review.
 
+## Result origin
+
+This formalization first presents the result as original work of this
+project. [Proof.md](Proof.md) accompanies the Lean development as the
+mathematical account of the same work; it is not a distinct prior source
+being formalized. The source entry in [formalization.yaml](formalization.yaml)
+therefore uses `type: original-proof` and `relationship: other`.
+[Disclosure.md](Disclosure.md) records the respective GPT 6 Pro and GPT-6
+Astra contributions. The literature below supplies background and comparison;
+this origin declaration does not establish worldwide priority.
+
 ## The closest interval-matrix comparison
 
 [Hladík, *Eigenvalues of symmetric tridiagonal interval matrices revisited*,
